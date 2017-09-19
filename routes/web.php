@@ -17,10 +17,18 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/CMS/', function () use ($router) {
-    return view('CMS/index');
+	$types = \App\Type::all();
+    return view('CMS/index', ['types' => $types]);
 });
 
 //post user wen login
 $router->post('/CMS/', function () use ($router) {
     return view('CMS/index');
 });
+
+//test
+$router->get('/CMS/types', function() {
+    return \App\Type::all();
+});
+
+$router->get('/CMS/type/{id}', 'TypeController@show');

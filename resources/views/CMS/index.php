@@ -17,6 +17,9 @@ if(isset($_POST['loginBtn'])){
 	}
 }
 
+print_r($types[0]);
+die();
+
 //CONTENT TYPES
 //$contentTypes = getContentTypes();
 //LANGUAGES
