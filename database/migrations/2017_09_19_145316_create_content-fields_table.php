@@ -13,7 +13,15 @@ class CreateContentFieldsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('content-fields', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+
+            $table->integer('content-id');
+            $table->integer('field-id');
+            $table->string('lang-code');
+            $table->string('value');
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateContentFieldsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('content-fields');
     }
 }

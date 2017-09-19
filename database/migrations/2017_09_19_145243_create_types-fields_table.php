@@ -13,7 +13,19 @@ class CreateTypesFieldsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('types-fields', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+
+            $table->integer('type-id');
+            $table->string('name');
+            $table->enum('format', ['number', 'text', 'url', 'multiline']);
+            $table->string('hint');
+            $table->string('placeholder');
+            $table->boolean('show-in-list')->default(false);
+
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -23,6 +35,6 @@ class CreateTypesFieldsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('types-fields');
     }
 }
