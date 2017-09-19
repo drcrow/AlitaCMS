@@ -23,6 +23,7 @@ class CreateTypesFieldsTable extends Migration
             $table->string('hint');
             $table->string('placeholder');
             $table->boolean('show-in-list')->default(false);
+            $table->boolean('wysiwyg')->default(false);
 
             $table->softDeletes();
         });
