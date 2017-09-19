@@ -9,4 +9,8 @@ class TypeController extends Controller
     {
         return Type::findOrFail($id);
     }
+
+    public function all(){
+    	return Type::getAllTypes();
+    }
 }

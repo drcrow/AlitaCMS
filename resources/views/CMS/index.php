@@ -17,7 +17,7 @@ if(isset($_POST['loginBtn'])){
 	}
 }
 
-print_r($types[0]);
+var_dump($types[0]['table']);
 die();
 
 //CONTENT TYPES

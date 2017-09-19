@@ -8,5 +8,9 @@ class Type extends Model {
         'label-singular',
         'label-plural'
     ];
+
+    public static function getAllTypes(){
+        return DB::table('types');
+    }
   
 }
