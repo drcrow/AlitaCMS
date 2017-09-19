@@ -12,6 +12,15 @@
 */
 
 $router->get('/', function () use ($router) {
-    //return $router->app->version();
-    return view('greeting', ['name' => 'James']);
+    //return 'Welcome to AlitaCMS '.$router->app->version();
+    return view('greeting', ['version' => $router->app->version()]);
+});
+
+$router->get('/CMS/', function () use ($router) {
+    return view('CMS/index');
+});
+
+//post user wen login
+$router->post('/CMS/', function () use ($router) {
+    return view('CMS/index');
 });

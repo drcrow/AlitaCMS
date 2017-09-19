@@ -2,6 +2,7 @@
 
 <html>
     <body>
-        <h1>Hello, <?php echo $name; ?></h1>
+        <h1>Welcome to AlitaCMS</h1>
+        <p><?php echo $version; ?></p>
     </body>
 </html>
