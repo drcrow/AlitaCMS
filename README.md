@@ -9,7 +9,7 @@
 * `composer install`
 * Create a database and inform *.env* (remove *.example*)
 * `php artisan migrate` to create tables
-* `php artisan db:seed` to populate tables
+* `php -S localhost:8000 -t public` to start
 
 
 ### What can AlitaCMS do? ###
