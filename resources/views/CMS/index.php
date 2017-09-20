@@ -17,8 +17,14 @@ if(isset($_POST['loginBtn'])){
 	}
 }
 
-var_dump($types[0]['table']);
+//var_dump($types[0]);
+/*
+foreach($types as $type){
+echo $type;
+}
+
 die();
+*/
 
 //CONTENT TYPES
 //$contentTypes = getContentTypes();

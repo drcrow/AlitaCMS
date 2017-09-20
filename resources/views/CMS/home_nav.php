@@ -7,18 +7,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="."><img alt="<?php echo env('PAGE_TITLE'); ?>" src="icon.png" height=20 width=20> <?php echo env('PAGE_TITLE'); ?></a>
+      <a class="navbar-brand" href="."><img alt="<?php echo env('PAGE_TITLE'); ?>" src="../IMG/icon.png" height=20 width=20> <?= env('PAGE_TITLE'); ?></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <?php
-foreach($contentTypes as $ct){
-  if($ct->multi==true){
+foreach($types as $ct){
+  if($ct->multi==1){
     $url = '?content='.$ct->type;
   }else{//for single content types (multi=false)
     $url = '?content='.$ct->type.'&edit=1';
   }
-  echo '<li><a href="'.$url.'"><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> '.$ct->label.'</a></li>';
+  echo '<li><a href="'.$url.'"><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> '.$ct->{'label-plural'}.'</a></li>';
 }
 ?>
         <li><a href="?logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>

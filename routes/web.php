@@ -16,10 +16,14 @@ $router->get('/', function () use ($router) {
     return view('greeting', ['version' => $router->app->version()]);
 });
 
+/*
 $router->get('/CMS/', function () use ($router) {
-	$types = \App\Type::all();
-    return view('CMS/index', ['types' => $types]);
+	//$types = \App\Type::all();
+    
+    return view('CMS/index', ['types' => TypeController::all()]);
 });
+*/
+$router->get('CMS', 'AlitaController@showCMS');
 
 //post user wen login
 $router->post('/CMS/', function () use ($router) {
