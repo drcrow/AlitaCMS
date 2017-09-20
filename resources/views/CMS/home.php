@@ -10,7 +10,7 @@ if(isset($_GET['edit'])){
 	require_once('home_content_add.php');
 }elseif(isset($_GET['add'])){
 	require_once('home_content_add.php');
-}elseif(isset($_GET['content'])){
+}elseif(isset($selectedType)){
 	require_once('home_content.php');
 }else{
 	require_once('home_main.php');

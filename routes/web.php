@@ -22,13 +22,18 @@ $router->get('/CMS/', function () use ($router) {
     
     return view('CMS/index', ['types' => TypeController::all()]);
 });
-*/
-$router->get('CMS', 'AlitaController@showCMS');
 
 //post user wen login
 $router->post('/CMS/', function () use ($router) {
     return view('CMS/index');
 });
+*/
+$router->get('CMS', 'AlitaController@showCMS');
+$router->post('CMS', 'AlitaController@showCMS');
+
+$router->get('CMS/content/{type}', 'AlitaController@showCMStype');
+
+
 
 //test
 $router->get('/CMS/types', function() {
