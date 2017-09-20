@@ -14,9 +14,9 @@
 <?php
 foreach($types as $ct){
   if($ct->multi==1){
-    $url = '?content='.$ct->type;
+    $url = 'content/'.$ct->type;
   }else{//for single content types (multi=false)
-    $url = '?content='.$ct->type.'&edit=1';
+    $url = 'content/'.$ct->type.'/1';
   }
   echo '<li><a href="'.$url.'"><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> '.$ct->{'label-plural'}.'</a></li>';
 }

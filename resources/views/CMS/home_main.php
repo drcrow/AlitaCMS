@@ -6,7 +6,7 @@
 
 foreach($types as $ct){
   echo '<div class="thumbnail">';
-  echo '<div class="caption"><h5><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> <strong>'.$ct->label.'</strong></h5></div>';
+  echo '<div class="caption"><h5><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> <strong>'.$ct->{'label-plural'}.'</strong></h5></div>';
   echo '<dl class="dl-horizontal">';
   foreach($ct as $id=>$val){
     if(!is_array($val)){
