@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="."><img alt="<?php echo env('PAGE_TITLE'); ?>" src="../IMG/icon.png" height=20 width=20> <?= env('PAGE_TITLE'); ?></a>
+      <a class="navbar-brand" href="."><img alt="<?php echo env('PAGE_TITLE'); ?>" src="<?php echo env('SITE_URL'); ?>/IMG/icon.png" height=20 width=20> <?= env('PAGE_TITLE'); ?></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">

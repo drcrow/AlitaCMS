@@ -33,6 +33,8 @@ $router->post('CMS', 'AlitaController@showCMS');
 
 $router->get('CMS/content/{type}', 'AlitaController@showCMStype');
 
+$router->get('CMS/content/{type}/add', 'AlitaController@showCMStypeAdd');
+
 
 
 //test

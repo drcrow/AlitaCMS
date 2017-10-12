@@ -7,7 +7,7 @@
 ?>
 
   <h1 class="page-header">
-  	<span class="glyphicon <?=$selectedType->icon?>" aria-hidden="true"></span> <?=$selectedType->{'label-plural'}?> <a class="btn btn-success" href="CMS/content/<?=$selectedType->{'type'}?>/add"><span class="glyphicon glyphicon-plus" aria-hidden="false"></a>
+  	<span class="glyphicon <?=$selectedType->icon?>" aria-hidden="true"></span> <?=$selectedType->{'label-plural'}?> <a class="btn btn-success" href="<?php echo env('SITE_URL'); ?>/CMS/content/<?=$selectedType->{'type'}?>/add"><span class="glyphicon glyphicon-plus" aria-hidden="false"></a>
   </h1>
 <?php
 //DELETE CONFIRMATION
@@ -42,7 +42,7 @@ if(count($languages)>1){
 			$tempClass 	= '';
 		}
 
-		echo '<li role="presentation" class="'.$tempClass.'"><a href="#langTab-'.$lang.'"><img src="CMS/img/lang/'.$lang.'.png"> '.$lang.'</a></li>';
+		echo '<li role="presentation" class="'.$tempClass.'"><a href="#langTab-'.$lang.'"><img src="'.env('SITE_URL').'/IMG/lang/'.$lang.'.png"> '.$lang.'</a></li>';
 	}
 	echo '</ul>';
 }
@@ -53,6 +53,11 @@ if(count($languages)>1){
 if(count($languages)>1){
 	$first = true;
 	echo '<form class="form-horizontal content-form" method="post">';
+	
+	echo '<pre>'.print_r($selectedType, true).'</pre>';
+	foreach($selectedTypeFields as $selectedTypeField){
+		echo '<pre>'.print_r($selectedTypeField, true).'</pre>';
+	}
 	echo '<div class="tab-content" id="langTabContent"> ';
 	foreach($languages as $lang){
 		if($first){
@@ -62,8 +67,9 @@ if(count($languages)>1){
 			$tempClass 	= '';
 		}
 
+
 		echo '<div class="tab-pane fade '.$tempClass.'" role="tabpanel" id="langTab-'.$lang.'" aria-labelledby="home-tab"> ';
-		echo getTable($ct, $lang);
+		//echo getTable($ct, $lang);
 		echo '</div>';
 		
 	}

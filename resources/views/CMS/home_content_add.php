@@ -1,6 +1,6 @@
 <?php
 //gets the definition of the current content type
-$ct = getContentType($_GET['content']);
+//$ct = getContentType($_GET['content']);
 //flag indicaing the id of the item if it's an edition
 //false if it's an "add new"
 if(isset($_GET['edit'])){
@@ -21,6 +21,13 @@ if(isset($_GET['add'])){
   </h1>
 
 <?php
+
+echo '<pre>'.print_r($selectedType, true).'</pre>';
+	foreach($selectedTypeFields as $selectedTypeField){
+		echo '<pre>'.print_r($selectedTypeField, true).'</pre>';
+	}
+	die();
+
 //SAVE (or EDIT)
 if(count($_POST)>0){
 	if(saveData($ct, $_POST)){

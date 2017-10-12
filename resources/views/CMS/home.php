@@ -6,6 +6,18 @@ require_once('home_nav.php');
 <?php
 //require_once('home_sidebar.php');
 
+switch(@$selectMode){
+	case 'list':
+		require_once('home_content.php');
+		break;
+	case 'add':
+		require_once('home_content_add.php');
+		break;
+	default:
+		require_once('home_main.php');
+}
+
+/*
 if(isset($_GET['edit'])){
 	require_once('home_content_add.php');
 }elseif(isset($_GET['add'])){
@@ -15,6 +27,7 @@ if(isset($_GET['edit'])){
 }else{
 	require_once('home_main.php');
 }
+*/
 ?>
         
 

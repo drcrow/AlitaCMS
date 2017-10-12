@@ -20,13 +20,33 @@ class AlitaController extends Controller {
          $types 	= Type::all();
          $languages = explode(',', env('LANGUAGES'));
          $type 		= DB::table('types')->where('type', $type)->first();
+         $fields 	= DB::table('types-fields')->get();
          $content 	= DB::table('content')->where('type', $type);
 
         return view('CMS/index')
-        	->with('languages', 	$languages)
-        	->with('types', 		$types)
-        	->with('selectedType', 	$type)
-        	->with('content', 		$content)
+        	->with('selectMode',		 	'list')
+        	->with('languages', 			$languages)
+        	->with('types', 				$types)
+        	->with('selectedType', 			$type)
+        	->with('selectedTypeFields', 	$fields)
+        	->with('content', 				$content)
+        	;
+    }
+
+    public function showCMStypeAdd($type) {
+         $types 	= Type::all();
+         $languages = explode(',', env('LANGUAGES'));
+         $type 		= DB::table('types')->where('type', $type)->first();
+         $fields 	= DB::table('types-fields')->get();
+         $content 	= DB::table('content')->where('type', $type);
+
+        return view('CMS/index')
+        	->with('selectMode', 			'add')
+        	->with('languages', 			$languages)
+        	->with('types', 				$types)
+        	->with('selectedType', 			$type)
+        	->with('selectedTypeFields', 	$fields)
+        	->with('content', 				$content)
         	;
     }
 
