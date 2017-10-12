@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 class FormController extends Controller {
 
 	public static create(){
-
+		
 	}
 
 }

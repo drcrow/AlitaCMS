@@ -26,7 +26,7 @@ echo '<pre>'.print_r($selectedType, true).'</pre>';
 	foreach($selectedTypeFields as $selectedTypeField){
 		echo '<pre>'.print_r($selectedTypeField, true).'</pre>';
 	}
-	die();
+	//die();
 
 //SAVE (or EDIT)
 if(count($_POST)>0){
