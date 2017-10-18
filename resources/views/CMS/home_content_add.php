@@ -1,4 +1,4 @@
-<?php
+ <?php
 //gets the definition of the current content type
 //$ct = getContentType($_GET['content']);
 //flag indicaing the id of the item if it's an edition
@@ -73,7 +73,36 @@ if(count($languages)>1){
 		}
 
 		echo '<div class="tab-pane fade '.$tempClass.'" role="tabpanel" id="langTab-'.$lang.'" aria-labelledby="home-tab"> ';
-		echo getForm($ct, $lang, $isEdit);
+		//echo getForm($ct, $lang, $isEdit);
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		$form = '';
+		if($isEdit){
+			die('edition not working :)');
+			/*
+			$dataFilePath = CONTENT_DATA_DIR.$ct->type.'-'.$lang.'.json';
+			$data = getArrayFromJsonFile($dataFilePath, true);
+			$data = $data[$isEdit];
+			*/
+			//echo '<pre>'.print_r($data, true).'</pre>';
+		}
+		foreach($selectedTypeFields as $field){
+			$enabled = true;
+			if($isEdit && @$field->index==1){
+				$enabled = false;
+			}
+			$required = false;
+			/*
+			if(getIndexId($ct->type) == $field->id){
+				$required = true;
+			}
+			*/
+			$form .= getFormField($field, $lang, $enabled, @$data[$field->id], $required);
+		}
+		$form .= '<div class="pull-right" style="overflow:auto"><button class="btn btn-primary" type="submit">Save</button></div>';
+		echo $form;
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		echo '</div>';
 		
 	}

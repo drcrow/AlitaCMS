@@ -39,6 +39,9 @@ class AlitaController extends Controller {
          $type 		= DB::table('types')->where('type', $type)->first();
          $fields 	= DB::table('types-fields')->get();
          $content 	= DB::table('content')->where('type', $type);
+         $addForm 	= aaaasasd
+         asdasdasdasd
+         asdasdasd
 
         return view('CMS/index')
         	->with('selectMode', 			'add')
