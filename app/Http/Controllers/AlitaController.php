@@ -34,14 +34,12 @@ class AlitaController extends Controller {
     }
 
     public function showCMStypeAdd($type) {
-         $types 	= Type::all();
-         $languages = explode(',', env('LANGUAGES'));
-         $type 		= DB::table('types')->where('type', $type)->first();
-         $fields 	= DB::table('types-fields')->get();
-         $content 	= DB::table('content')->where('type', $type);
-         $addForm 	= aaaasasd
-         asdasdasdasd
-         asdasdasd
+         $types 		= Type::all();
+         $languages 	= explode(',', env('LANGUAGES'));
+         $type 			= DB::table('types')->where('type', $type)->first();
+         $fields 		= DB::table('types-fields')->get();
+         $content 		= DB::table('content')->where('type', $type);
+         $contentForm 	= $this->contentForm();
 
         return view('CMS/index')
         	->with('selectMode', 			'add')
@@ -50,7 +48,12 @@ class AlitaController extends Controller {
         	->with('selectedType', 			$type)
         	->with('selectedTypeFields', 	$fields)
         	->with('content', 				$content)
+        	->with('contentForm', 			$contentForm)
         	;
+    }
+
+    public function contentForm(){
+    	
     }
 
     public function getTable($ct, $lang){
