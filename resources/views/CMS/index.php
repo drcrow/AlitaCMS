@@ -54,6 +54,11 @@ die();
 <!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<!-- WYSIWYG -->
+
+	<script src="<?php echo env('SITE_URL'); ?>/trumbowyg/dist/trumbowyg.min.js"></script>
+	<link rel="stylesheet" href="<?php echo env('SITE_URL'); ?>/trumbowyg/dist/ui/trumbowyg.min.css">
+
 
     <title><?php echo env('PAGE_TITLE'); ?></title>
 </head>

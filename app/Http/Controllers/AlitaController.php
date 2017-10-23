@@ -39,7 +39,7 @@ class AlitaController extends Controller {
          $type 			= DB::table('types')->where('type', $type)->first();
          $fields 		= DB::table('types-fields')->get();
          $content 		= DB::table('content')->where('type', $type);
-         $contentForm 	= $this->contentForm();
+         $contentForm 	= $this->contentForm($type, $fields, $languages);
 
         return view('CMS/index')
         	->with('selectMode', 			'add')
@@ -52,8 +52,68 @@ class AlitaController extends Controller {
         	;
     }
 
-    public function contentForm(){
-    	
+    public function contentForm($type, $fields, $languages, $edit=''){
+    	$form = '';
+
+    	$first = true;
+		$form .= '<ul class="nav nav-tabs" id="langTabs">';
+		foreach($languages as $lang){
+			if($first){
+				$first = false;
+				$tempClass = 'active';	
+			}else{
+				$tempClass = '';
+			}
+
+			$form .= '<li role="presentation" class="'.$tempClass.'"><a href="#langTab-'.$lang.'"><img src="'.env('SITE_URL').'/IMG/lang/'.$lang.'.png"> '.$lang.'</a></li>';
+		}
+		$form .= '</ul>';
+
+		$form .= '<form class="form-horizontal content-form" method="post">';
+		$form .= '<div class="tab-content" id="langTabContent"> ';
+
+    	$first = true;
+
+    	foreach($languages as $lang){
+			if($first){
+				$first = false;
+				$tempClass = 'active in';	
+			}else{
+				$tempClass = '';
+			}
+
+			$form .= '<div class="tab-pane fade '.@$tempClass.'" role="tabpanel" id="langTab-'.@$lang.'" aria-labelledby="home-tab"> ';
+
+			if(@$isEdit){
+				die('edition not working :)');
+			}
+
+			foreach($fields as $field){
+				$enabled = true;
+				if(@$isEdit && @$field->index==1){
+					$enabled = false;
+				}
+				$required = false;
+				/*
+				if(getIndexId($ct->type) == $field->id){
+					$required = true;
+				}
+				*/
+				$form .= $this->getFormField($field, $lang, $enabled, @$data[$field->id], $required);
+				
+
+				$form .= '<pre>'.print_r($field, true).'</pre>';
+			}
+			$form .= '<div class="pull-right" style="overflow:auto"><button class="btn btn-primary" type="submit">Save</button></div>';
+			$form .= '</div>';
+		}
+
+		$form .= '<input type="hidden" name="type" value="'.$type->type.'">';
+		$form .= '<input type="hidden" name="edit" value="'.$edit.'">';
+		$form .= '</div>';
+		$form .= '</form>';
+
+		return $form;
     }
 
     public function getTable($ct, $lang){
@@ -101,4 +161,188 @@ class AlitaController extends Controller {
 		return $html;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Field functions
+Define new fields types here
+*/
+
+public function getFormField($field, $lang, $enabled=true, $value='', $required=false){
+	$func = 'field_'.$field->format;
+	//if(function_exists($func)){
+		return $this->$func($field, $lang, $enabled, $value, $required);
+	//}else{
+		//return 'Field type '.$field->format.' is undefined!';
+	//}
 }
+
+///////////////////////////////
+
+public function field_separator($fieldInfo, $lang, $enabled=true, $value='', $required=false){
+	//field id & name
+	$fId = $lang.'['.$fieldInfo->id.']';
+
+	$html = '
+		<div class="form-group">
+			<label for="'.$fId.'" class="col-sm-2 control-label"><h3>'.$fieldInfo->name.'</h3></label>
+			<div class="col-sm-8"><hr></div>
+		</div>
+	';
+
+	return $html;
+}
+
+public function field_text($fieldInfo, $lang, $enabled=true, $value='', $required=false){
+	//field id & name
+	$fId = $lang.'['.$fieldInfo->id.']';
+	//hint (or "help block")
+	$hint = '';
+	if(isset($fieldInfo->hint)){
+		$hint = '<p class="help-block">'.$fieldInfo->hint.'</p>';
+	}
+	//reload value from POST
+	if(isset($_POST[$lang][$fieldInfo->id])){
+		$value = $_POST[$lang][$fieldInfo->id];
+	}
+	//disable field
+	if($enabled){
+		$disabled = '';
+	}else{
+		$disabled = 'readonly';
+	}
+	//required field
+	if($required){
+		$required = 'required';
+	}else{
+		$required = '';
+	}
+	$html = '
+		<div class="form-group">
+			<label for="'.$fId.'" class="col-sm-2 control-label">'.$fieldInfo->name.'</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" id="'.$fId.'" name="'.$fId.'" value="'.$value.'" '.$disabled.' '.$required.'>'.$hint.'
+			</div>
+		</div>
+	';
+
+	return $html;
+}
+
+public function field_number($fieldInfo, $lang, $enabled=true, $value='', $required=false){
+	$fId = $lang.'['.$fieldInfo->id.']';
+	$hint = '';
+	if(isset($fieldInfo->hint)){
+		$hint = '<p class="help-block">'.$fieldInfo->hint.'</p>';
+	}
+	//$value = '';
+	if(isset($_POST[$lang][$fieldInfo->id])){
+		$value = $_POST[$lang][$fieldInfo->id];
+	}
+	if($enabled){
+		$disabled = '';
+	}else{
+		$disabled = 'readonly';
+	}
+	//required field
+	if($required){
+		$required = 'required';
+	}else{
+		$required = '';
+	}
+	$html = '
+		<div class="form-group">
+			<label for="'.$fId.'" class="col-sm-2 control-label">'.$fieldInfo->name.'</label>
+			<div class="col-sm-2">
+				<input type="number" class="form-control" id="'.$fId.'" name="'.$fId.'" value="'.$value.'" '.$disabled.' '.$required.'>'.$hint.'
+			</div>
+		</div>
+	';
+
+	return $html;
+}
+
+public function field_url($fieldInfo, $lang, $enabled=true, $value=''){
+	$fId = $lang.'['.$fieldInfo->id.']';
+	$hint = '';
+	if(isset($fieldInfo->hint)){
+		$hint = '<p class="help-block">'.$fieldInfo->hint.'</p>';
+	}
+	//$value = '';
+	if(isset($_POST[$lang][$fieldInfo->id])){
+		$value = $_POST[$lang][$fieldInfo->id];
+	}
+	if($enabled){
+		$disabled = '';
+	}else{
+		$disabled = 'readonly';
+	}
+	$html = '
+		<div class="form-group">
+			<label for="'.$fId.'" class="col-sm-2 control-label">'.$fieldInfo->name.'</label>
+			<div class="col-sm-10">
+				<input type="url" class="form-control" id="'.$fId.'" name="'.$fId.'" value="'.$value.'" '.$disabled.'>'.$hint.'
+			</div>
+		</div>
+	';
+
+	return $html;
+}
+
+public function field_multiline($fieldInfo, $lang, $enabled=true, $value=''){
+	$fId = $lang.'['.$fieldInfo->id.']';
+	$hint = '';
+	if(isset($fieldInfo->hint)){
+		$hint = '<p class="help-block">'.$fieldInfo->hint.'</p>';
+	}
+	//$value = '';
+	if(isset($_POST[$lang][$fieldInfo->id])){
+		$value = $_POST[$lang][$fieldInfo->id];
+	}
+	if($enabled){
+		$disabled = '';
+	}else{
+		$disabled = 'readonly';
+	}
+	if(@$fieldInfo->wysiwyg){
+		$wysiwygClass = 'add_trumbowyg_wysiwyg';
+	}else{
+		$wysiwygClass = '';
+	}
+	$html = '
+		<div class="form-group">
+			<label for="'.$fId.'" class="col-sm-2 control-label">'.$fieldInfo->name.'</label>
+			<div class="col-sm-10">
+				<textarea class="form-control '.$wysiwygClass.'" rows="3" id="'.$fId.'" name="'.$fId.'" placeholder="" '.$disabled.'>'.$value.'</textarea>'.$hint.'
+			</div>
+		</div>
+	';
+
+	return $html;
+}
+
+}//class
