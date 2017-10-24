@@ -14,14 +14,14 @@
 <?php
 foreach($types as $ct){
   if($ct->multi==1){
-    $url = 'content/'.$ct->type;
+    $url = env('SITE_URL').'/CMS/content/'.$ct->type;
   }else{//for single content types (multi=false)
-    $url = 'content/'.$ct->type.'/1';
+    $url = env('SITE_URL').'/CMS/content/'.$ct->type.'/1';
   }
   echo '<li><a href="'.$url.'"><span class="glyphicon '.$ct->icon.'" aria-hidden="true"></span> '.$ct->{'label-plural'}.'</a></li>';
 }
 ?>
-        <li><a href="?logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+        <li><a href="<?=env('SITE_URL'); ?>/CMS/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
       </ul>
 
     </div>
