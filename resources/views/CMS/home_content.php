@@ -30,52 +30,11 @@ if(isset($_GET['delete']) && isset($_GET['confirm'])){
 }
 
 
-//LANGUAGES TABS
-if(count($languages)>1){
-	$first = true;
-	echo '<ul class="nav nav-tabs" id="langTabs">';
-	foreach($languages as $lang){
-		if($first){
-			$first 		= false;
-			$tempClass 	= 'active';	
-		}else{
-			$tempClass 	= '';
-		}
-
-		echo '<li role="presentation" class="'.$tempClass.'"><a href="#langTab-'.$lang.'"><img src="'.env('SITE_URL').'/IMG/lang/'.$lang.'.png"> '.$lang.'</a></li>';
-	}
-	echo '</ul>';
-}
 ?>
 
 <?php
 //TABLES TABS
-if(count($languages)>1){
-	$first = true;
-	echo '<form class="form-horizontal content-form" method="post">';
-	
-	echo '<pre>'.print_r($selectedType, true).'</pre>';
-	foreach($selectedTypeFields as $selectedTypeField){
-		echo '<pre>'.print_r($selectedTypeField, true).'</pre>';
-	}
-	echo '<div class="tab-content" id="langTabContent"> ';
-	foreach($languages as $lang){
-		if($first){
-			$first 		= false;
-			$tempClass 	= 'active in';	
-		}else{
-			$tempClass 	= '';
-		}
-
-
-		echo '<div class="tab-pane fade '.$tempClass.'" role="tabpanel" id="langTab-'.$lang.'" aria-labelledby="home-tab"> ';
-		//echo getTable($ct, $lang);
-		echo '</div>';
-		
-	}
-	echo '</div>';
-	echo '</form>';
-}
+echo $contentTable;
 ?>
 
 

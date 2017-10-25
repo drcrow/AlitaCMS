@@ -17,11 +17,12 @@ class AlitaController extends Controller {
     }
 
     public function showCMStype($type) {
-         $types 	= Type::all();
-         $languages = explode(',', env('LANGUAGES'));
-         $type 		= DB::table('types')->where('type', $type)->first();
-         $fields 	= DB::table('types-fields')->get();
-         $content 	= DB::table('content')->where('type', $type);
+         $types 		= Type::all();
+         $languages 	= explode(',', env('LANGUAGES'));
+         $type 			= DB::table('types')->where('type', $type)->first();
+         $fields 		= DB::table('types-fields')->get();
+         $content 		= DB::table('content')->where('type-id', $type->id)->get();
+         $contentTable 	=  $this->contentTable($type, $content, $languages);
 
         return view('CMS/index')
         	->with('selectMode',		 	'list')
@@ -30,6 +31,7 @@ class AlitaController extends Controller {
         	->with('selectedType', 			$type)
         	->with('selectedTypeFields', 	$fields)
         	->with('content', 				$content)
+        	->with('contentTable', 			$contentTable)
         	;
     }
 
@@ -39,7 +41,7 @@ class AlitaController extends Controller {
          $type 			= DB::table('types')->where('type', $type)->first();
          $fields 		= DB::table('types-fields')->get();
          $content 		= DB::table('content')->where('type', $type);
-         $contentForm 	= $this->contentForm($type, $fields, $languages);
+         $contentForm 	= $this->contentForm($type, $fields, $content, $languages);
 
         return view('CMS/index')
         	->with('selectMode', 			'add')
@@ -51,6 +53,52 @@ class AlitaController extends Controller {
         	->with('contentForm', 			$contentForm)
         	;
     }
+
+
+    public function contentTable($type, $fields, $content, $languages){
+    	$table = '';
+    	$first = true;
+		$table .= '<ul class="nav nav-tabs" id="langTabs">';
+		foreach($languages as $lang){
+			if($first){
+				$first 		= false;
+				$tempClass 	= 'active';	
+			}else{
+				$tempClass 	= '';
+			}
+
+			$table .= '<li role="presentation" class="'.$tempClass.'"><a href="#langTab-'.$lang.'"><img src="'.env('SITE_URL').'/IMG/lang/'.$lang.'.png"> '.$lang.'</a></li>';
+		}
+		$table .= '</ul>';
+
+
+		$first = true;
+		$table .= '<form class="form-horizontal content-form" method="post">';
+		$table .= '<div class="tab-content" id="langTabContent"> ';
+
+		foreach($languages as $lang){
+			if($first){
+				$first 		= false;
+				$tempClass 	= 'active in';	
+			}else{
+				$tempClass 	= '';
+			}
+
+			$table .= '<div class="tab-pane fade '.$tempClass.'" role="tabpanel" id="langTab-'.$lang.'" aria-labelledby="home-tab"> ';
+			/////////////////////////////////////////////////////////////////////
+			$table .= $this->contentTableGenerator($type, $fields, $content, $lang);
+			////////////////////////////////////////////////////////////////////
+			$table .= '</div>';
+			
+		}
+		$table .= '</div>';
+		$table .= '</form>';
+
+		return $table;
+    }
+
+
+
 
     public function contentForm($type, $fields, $languages, $edit=''){
     	$form = '';
