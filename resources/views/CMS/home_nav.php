@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
 <?php
 foreach($types as $ct){
-  if($ct->multi==1){
+  if($ct->multi==1){//for multi content types
     $url = env('SITE_URL').'/CMS/content/'.$ct->type;
   }else{//for single content types (multi=false)
     $url = env('SITE_URL').'/CMS/content/'.$ct->type.'/1';
