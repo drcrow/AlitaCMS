@@ -28,6 +28,8 @@ $router->post('/CMS/', function () use ($router) {
     return view('CMS/index');
 });
 */
+
+/* CMS */
 $router->get('CMS', 'AlitaController@showCMS');
 $router->post('CMS', 'AlitaController@showCMS');
 
@@ -35,6 +37,9 @@ $router->get('CMS/content/{type}', 'AlitaController@showCMStype');
 
 $router->get('CMS/content/{type}/add', 'AlitaController@showCMStypeAdd');
 
+/* API */
+$router->get('API/copy-content', 'CopaAPIController@showCMS');
+$router->post('API/game-response', 'CopaAPIController@showCMS');
 
 
 //test
