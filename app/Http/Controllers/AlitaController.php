@@ -99,9 +99,6 @@ class AlitaController extends Controller {
 
     public function contentTableGenerator($ct, $lang){
 
-		$dataFilePath = CONTENT_DATA_DIR.$ct->type.'-'.$lang.'.json';
-		$actualData = getArrayFromJsonFile($dataFilePath);
-
 		$html = '
 		<table class="table table-bordered table-striped">
 			<thead><tr>';

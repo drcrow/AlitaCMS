@@ -28,7 +28,7 @@ $router->post('/CMS/', function () use ($router) {
     return view('CMS/index');
 });
 */
-
+///////////////////////////////////////////////////////////////////////////////////////
 /* CMS */
 $router->get('CMS', 'AlitaController@showCMS');
 $router->post('CMS', 'AlitaController@showCMS');
@@ -37,11 +37,19 @@ $router->get('CMS/content/{type}', 'AlitaController@showCMStype');
 
 $router->get('CMS/content/{type}/add', 'AlitaController@showCMStypeAdd');
 
+///////////////////////////////////////////////////////////////////////////////////////
 /* API */
-$router->get('API/copy-content', 'CopaAPIController@showCMS');
-$router->post('API/game-response', 'CopaAPIController@showCMS');
+$router->get('API/{lang}/copy-content', 'CopaAPIController@getSiteCopy');
+
+$router->post('API/{lang}/user/login', 'CopaAPIController@userLogin');
+$router->post('API/{lang}/user/register', 'CopaAPIController@userRegister');
+$router->get('API/{lang}/user/info/{id}', 'CopaAPIController@userInfo');
 
 
+$router->get('API/{lang}/game/questions', 'CopaAPIController@gameQuestions');
+$router->post('API/{lang}/game/response', 'CopaAPIController@gameResponse');
+
+///////////////////////////////////////////////////////////////////////////////////////
 //test
 $router->get('/CMS/types', function() {
     return \App\Type::all();

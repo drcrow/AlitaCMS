@@ -18,6 +18,7 @@ class CreateTypesFieldsTable extends Migration
             $table->timestamps();
 
             $table->integer('type-id');
+            $table->string('label');
             $table->string('name');
             $table->enum('format', ['number', 'text', 'url', 'multiline']);
             $table->string('hint');
