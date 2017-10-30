@@ -1,0 +1,26 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: public
+
+# Ensure we skip ".env", which is only for local development
+skip_files:
+  - .env
+
+env_variables:
+  # Put production environment variables here.
+  APP_LOG: errorlog
+  APP_KEY: mBa8aAIlP84o4P0R3mppHrSKa1Vkwujm
+  STORAGE_DIR: /tmp
+  APP_DEBUG: true
+  APP_TIMEZONE: EST
+  APP_ENV: local
+  DB_CONNECTION: mysql
+  DB_HOST: 127.0.0.1
+  DB_PORT: 3306
+  DB_DATABASE: homestead
+  DB_USERNAME: homestead
+  DB_PASSWORD: secret
+  CACHE_DRIVER: file
+  QUEUE_DRIVER: sync

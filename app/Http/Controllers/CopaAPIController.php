@@ -109,6 +109,7 @@ class CopaAPIController extends Controller {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function gameValidateAswer(Request $request, $lang){
 		$question = DB::table('questions')
+			->select('id', 'lang', 'question', 'options', 'answer')
         	->where('id', $request->question)
         	->where('lang', $lang)
         	->first();
@@ -118,11 +119,22 @@ class CopaAPIController extends Controller {
         	return response()->json(array('status'=>'error', 'code'=>774, 'description'=>'question doesnt exists'));
         }
 
+        if($question->answer == $request->answer){
+        	$question->valid = true;
+        }else{
+        	$question->valid = false;
+        }
+
         $question->status = 'ok';
         $question->options = explode("\r\n", $question->options);
         return response()->json($question);
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function gameResult(Request $request, $lang){
+		
 
+		
+	}
 
 
 
