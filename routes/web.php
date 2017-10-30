@@ -45,9 +45,8 @@ $router->post('API/{lang}/user/login', 'CopaAPIController@userLogin');
 $router->post('API/{lang}/user/register', 'CopaAPIController@userRegister');
 $router->get('API/{lang}/user/info/{id}', 'CopaAPIController@userInfo');
 
-
 $router->get('API/{lang}/game/questions', 'CopaAPIController@gameQuestions');
-$router->post('API/{lang}/game/response', 'CopaAPIController@gameResponse');
+$router->post('API/{lang}/game/validate', 'CopaAPIController@gameValidateAswer');
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //test

@@ -90,6 +90,45 @@ class CopaAPIController extends Controller {
 	    $user->status = 'ok';
 	    return response()->json($user);
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function gameQuestions($lang){
+		$questions = DB::table('questions')
+			->where('lang', $lang)
+			->select('id', 'lang', 'question', 'options')
+			->inRandomOrder()
+			->limit(5)
+			->get();
+
+		foreach($questions as $id=>$q){
+			$questions[$id]->options = explode("\r\n", $q->options);
+		}
+
+
+		return response()->json($questions);
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function gameValidateAswer(Request $request, $lang){
+		$question = DB::table('questions')
+        	->where('id', $request->question)
+        	->where('lang', $lang)
+        	->first();
+
+
+        if(@$question->id != $request->question){
+        	return response()->json(array('status'=>'error', 'code'=>774, 'description'=>'question doesnt exists'));
+        }
+
+        $question->status = 'ok';
+        $question->options = explode("\r\n", $question->options);
+        return response()->json($question);
+	}
+
+
+
+
+
+
+
 
 }//class
 
