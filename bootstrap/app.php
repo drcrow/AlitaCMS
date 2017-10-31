@@ -58,9 +58,10 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+ $app->middleware([
+	palanik\lumen\Middleware\LumenCors::class
 //    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ ]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
@@ -97,5 +98,7 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+
 
 return $app;

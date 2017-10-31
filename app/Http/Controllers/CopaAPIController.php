@@ -56,6 +56,7 @@ class CopaAPIController extends Controller {
         }
 
 
+
         //add new user
 		$id = DB::table('users')->insertGetId(
 			[
@@ -66,8 +67,20 @@ class CopaAPIController extends Controller {
 				'birthday' 		=> $request->birthday,
 				'country' 		=> $request->country,
 				'city' 			=> $request->city, 
+				'phone'			=> $request->phone,
+				'referer' 		=> @$request->referer,
 				'created_at' 	=> date('Y-m-d H:i:s')
 			]
+		);
+
+
+		$ac = DB::table('actions')->insertGetId(
+		    [
+		    	'user_id' 		=> $id, 
+		    	'action' 		=> 'registration',
+		    	'points'		=> 10,
+		    	'created_at' 	=> date('Y-m-d H:i:s')
+		    ]
 		);
 
 		/*
@@ -87,6 +100,8 @@ class CopaAPIController extends Controller {
 	        ->where('id', $id)
 	        ->first();
 
+
+	    $user->points = $this->getUserPoints($user->id);
 	    $user->status = 'ok';
 	    return response()->json($user);
 	}
@@ -131,14 +146,86 @@ class CopaAPIController extends Controller {
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function gameResult(Request $request, $lang){
-		
+		$previousGame = DB::table('actions')
+        	->where('action', 'trivia')
+        	->where('user_id', $request->user)
+        	->whereRaw('created_at > (NOW() - INTERVAL 24 HOUR)')
+        	->first();
 
+        	//return response()->json($previousGame);
+
+        if(@$previousGame->user_id == $request->user){
+        	return response()->json(array('status'=>'error', 'code'=>775, 'description'=>'already played in the last 24hs'));
+        }else{
+
+        	$id = DB::table('actions')->insertGetId(
+			    [
+			    	'user_id' 		=> $request->user, 
+			    	'action' 		=> 'trivia',
+			    	'points'		=> $request->answers,
+			    	'trivia_time'	=> $request->time,
+			    	'created_at' 	=> date('Y-m-d H:i:s')
+			    ]
+			);
+
+			$action = DB::table('actions')
+		        ->where('id', $id)
+		        ->first();
+
+		    $action->status = 'ok';
+		    return response()->json($action);
+
+        }
 		
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function getUserPoints($id){
+
+		$actions = DB::table('actions')
+			->select(DB::raw('SUM(points) as total_points'))
+        	->where('user_id', $id)
+        	->first();
 
 
+        return($actions->total_points);
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function userShare(Request $request, $lang){
+		
+		if($request->method != 'facebook' && $request->method != 'twitter' && $request->method != 'email'){
+			return response()->json(array('status'=>'error', 'code'=>776, 'description'=>'unknown method'));
+		}
+
+		$previousShare = DB::table('actions')
+        	->where('action', $request->method)
+        	->where('user_id', $request->user)
+        	->whereRaw('created_at > (NOW() - INTERVAL 24 HOUR)')
+        	->first();
+
+        	//return response()->json($previousGame);
+
+        if(@$previousShare->user_id == $request->user){
+        	return response()->json(array('status'=>'error', 'code'=>777, 'description'=>'already shared with this method in the past 24hs'));
+        }else{
+        	$id = DB::table('actions')->insertGetId(
+			    [
+			    	'user_id' 		=> $request->user, 
+			    	'action' 		=> $request->method,
+			    	'points'		=> 5,
+			    	'created_at' 	=> date('Y-m-d H:i:s')
+			    ]
+			);
+
+			$action = DB::table('actions')
+		        ->where('id', $id)
+		        ->first();
+
+		    $action->status = 'ok';
+		    return response()->json($action);
+        }
 
 
+	}
 
 
 
