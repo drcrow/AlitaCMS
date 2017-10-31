@@ -35,6 +35,8 @@ class CopaAPIController extends Controller {
        	//user exists
         if(isset($user->email) && $user->email == $m1){
         	//return $user;
+        	
+			$user->points = $this->getUserPoints($user->id);
         	$user->status = 'ok';
         	return response()->json($user);
         }else{
@@ -106,20 +108,34 @@ class CopaAPIController extends Controller {
 	    return response()->json($user);
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public function gameQuestions($lang){
-		$questions = DB::table('questions')
-			->where('lang', $lang)
-			->select('id', 'lang', 'question', 'options')
-			->inRandomOrder()
-			->limit(5)
-			->get();
+	public function gameQuestions(Request $request, $lang){
 
-		foreach($questions as $id=>$q){
-			$questions[$id]->options = explode("\r\n", $q->options);
+		$previousGame = DB::table('actions')
+        	->where('action', 'trivia')
+        	->where('user_id', $request->user)
+        	->whereRaw('created_at > (NOW() - INTERVAL 24 HOUR)')
+        	->first();
+
+        	//return response()->json($previousGame);
+
+        if(@$previousGame->user_id == $request->user){
+        	return response()->json(array('status'=>'error', 'code'=>775, 'description'=>'already played in the last 24hs'));
+        }else{
+
+			$questions = DB::table('questions')
+				->where('lang', $lang)
+				->select('id', 'lang', 'question', 'options')
+				->inRandomOrder()
+				->limit(5)
+				->get();
+
+			foreach($questions as $id=>$q){
+				$questions[$id]->options = explode("\r\n", $q->options);
+			}
+
+
+			return response()->json($questions);
 		}
-
-
-		return response()->json($questions);
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function gameValidateAswer(Request $request, $lang){
