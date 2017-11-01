@@ -144,7 +144,7 @@ div[class="show-images-2"] {
         <td bgcolor="#f3f3f3" width="10" >&nbsp;</td>
         <td bgcolor="#172f4e" width="200" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#666666; text-align:left; line-height:13px; word-spacing:-1px;"><img alt="" border="0" src="images/logo.jpg" height="65" style="display: block;" width="200"/></td>
         <td class="sixTo100" bgcolor="#172f4e" width="350" align="right" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#666666; text-align:right; line-height:22px; word-spacing:-1px;">
-        	<a href="#" target="_blank" style="text-decoration:none; color:#ffffff;">copa.com&nbsp; &nbsp;</a>
+        	<a href="%copa%" target="_blank" style="text-decoration:none; color:#ffffff;">copa.com&nbsp; &nbsp;</a>
         </td>
         <td bgcolor="#f3f3f3" width="10">&nbsp;</td>
         <td class="hideOnMobile" bgcolor="#f3f3f3" width="15">&nbsp;</td>
@@ -215,7 +215,7 @@ div[class="show-images-2"] {
         <td class="hideOnMobile" bgcolor="#f3f3f3" width="10">&nbsp;</td>
         <td class="hideOnMobile" bgcolor="#ffffff" align="center" valign="top" style="width:550px; font-family:Arial, Helvetica, sans-serif; font-size:23px; color:#005795; font-weight:bold; line-height:22px; ">
         <br />
-        <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:none; text-align:center; color:#000000; font-weight:bold;" target="_blank" href="#"><img alt="EARN MORE POINTS" border="0" src="images/cta01.jpg" style="display:block; margin:0 auto;" height="61" width="200"/></a>
+        <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:none; text-align:center; color:#000000; font-weight:bold;" target="_blank" href="%cta%"><img alt="EARN MORE POINTS" border="0" src="images/cta01.jpg" style="display:block; margin:0 auto;" height="61" width="200"/></a>
         </td>
         <td class="hideOnMobile" bgcolor="#f3f3f3" width="10">&nbsp;</td>
         <td class="hideOnMobile" bgcolor="#f3f3f3" width="15">&nbsp;</td>
@@ -224,7 +224,7 @@ div[class="show-images-2"] {
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" style="display:block; max-width:600px; background-color:#172f4e; ">
 	<tr>
-    	<td bgcolor="#f3f3f3" class="showOnMobile" style="display:none; width:0px; font-size:0px; line-height:0px; max-height:0px; padding: 0px; float:left;"><a style="font-family:Arial, Helvetica, sans-serif; text-decoration:none; text-align:center; color:#000000; font-weight:bold;" target="_blank" href="#"><img alt="EARN MORE POINTS" border="0" class="img_fx" height="68" src="images/cta02.jpg" style="max-height:0;width:0;" width="320"/></a></td>
+    	<td bgcolor="#f3f3f3" class="showOnMobile" style="display:none; width:0px; font-size:0px; line-height:0px; max-height:0px; padding: 0px; float:left;"><a style="font-family:Arial, Helvetica, sans-serif; text-decoration:none; text-align:center; color:#000000; font-weight:bold;" target="_blank" href="%cta%"><img alt="EARN MORE POINTS" border="0" class="img_fx" height="68" src="images/cta02.jpg" style="max-height:0;width:0;" width="320"/></a></td>
     </tr>
 </table>
 
@@ -236,7 +236,7 @@ div[class="show-images-2"] {
         <th class="forFloaters" bgcolor="#3c3935" align="left" valign="middle" style=" width:345px; font-family:Arial, Helvetica, sans-serif; font-size:9px; color:#f3f3f3; font-weight:normal; line-height:12px;"><br />                
         Copyright&nbsp;&copy;&nbsp;2017&nbsp;Copa&nbsp;Airlines.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
 		Business Park, Torre Norte. Costa del Este. Panama,&nbsp;Rep&nbsp;de&nbsp;Panam&aacute;<br /><br /><br />
-       	<a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="#">Terms and Conditions</a> | <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="#">Privacy Policy</a> | <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="#">Contact us</a><br /><br />
+       	<a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="%terminos%">Terms and Conditions</a> | <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="%politica%">Privacy Policy</a> | <a style="font-family:Arial, Helvetica, sans-serif; text-decoration:underline; text-align:center; color:#f3f3f3;" target="_blank" href="%contactenos%">Contact us</a><br /><br />
         </th>
         <th class="hideOnMobile" bgcolor="#3c3935" width="20">&nbsp;</th>
         <th class="forFloaters" align="center" bgcolor="#3c3935" valign="middle"><img alt="CopaAirlines A STAR ALLIANCE MEMBER" border="0" src="images/logo02.jpg" style="display:block; margin:0 auto;" height="108" width="145"/></th>

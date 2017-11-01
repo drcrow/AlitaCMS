@@ -99,7 +99,7 @@ class CopaAPIController extends Controller {
 	    return $this->userInfo($id);
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public function userInfo($id){
+	public function userInfo($id, $returnObject = false){
 		$user = DB::table('users')
 	        ->where('id', $id)
 	        ->first();
@@ -123,7 +123,12 @@ class CopaAPIController extends Controller {
 
 	    $user->points = $this->getUserPoints(@$user->id);
 	    $user->status = 'ok';
-	    return response()->json($user);
+	    
+	    if($returnObject){
+	   		return $user;
+	   	}else{
+	   		return response()->json($user);
+	   	}
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function gameQuestions(Request $request, $lang){

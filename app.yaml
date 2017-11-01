@@ -24,3 +24,8 @@ env_variables:
   DB_PASSWORD: Ls7LHDvo61gV
   CACHE_DRIVER: file
   QUEUE_DRIVER: sync
+  PAGE_TITLE: CopaMendoza
+  ADMIN_USER: admin
+  ADMIN_PASS: alita
+  LANGUAGES: en,es
+  SITE_URL: https://copa-176119.appspot.com
