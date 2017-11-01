@@ -52,7 +52,8 @@ $router->post('API/{lang}/game/result', 'CopaAPIController@gameResult');
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /* EMAILS */
-$router->get('API/{lang}/emails/view/{email}', 'EmailsController@viewEmail');
+$router->get('API/{lang}/emails/view/{email}/{market}', 'EmailsController@viewEmail'); //market = CO, MX, PA, US
+$router->post('API/{lang}/emails/invite', 'EmailsController@sendInvite');
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //test

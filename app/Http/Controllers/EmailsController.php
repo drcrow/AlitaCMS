@@ -8,8 +8,16 @@ use Illuminate\Http\Request;
 class EmailsController extends Controller {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public function viewEmail($lang, $email){
-		
+	public function viewEmail($lang, $email, $market){
+
+		return view('emails/'.$lang.'/'.$email.'/index');
+
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function sendInvite(Request $request, $lang){
+
+		return response()->json(array('status'=>'ok'));
+
 	}
 
 }//class
