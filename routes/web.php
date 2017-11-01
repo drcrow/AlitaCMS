@@ -51,6 +51,10 @@ $router->post('API/{lang}/game/validate', 'CopaAPIController@gameValidateAswer')
 $router->post('API/{lang}/game/result', 'CopaAPIController@gameResult');
 
 ///////////////////////////////////////////////////////////////////////////////////////
+/* EMAILS */
+$router->get('API/{lang}/emails/view/{email}', 'EmailsController@viewEmail');
+
+///////////////////////////////////////////////////////////////////////////////////////
 //test
 $router->get('/CMS/types', function() {
     return \App\Type::all();

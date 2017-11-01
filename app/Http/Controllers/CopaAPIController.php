@@ -31,7 +31,8 @@ class CopaAPIController extends Controller {
         	->first();
 		
 
-
+        return $this->userInfo(@$user->id);
+        /*
        	//user exists
         if(isset($user->email) && $user->email == $m1){
         	//return $user;
@@ -42,6 +43,7 @@ class CopaAPIController extends Controller {
         }else{
 	        return response()->json(array('status'=>'error', 'code'=>772, 'description'=>'user doesnt exists'));
         }
+        */
 
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,8 +104,24 @@ class CopaAPIController extends Controller {
 	        ->where('id', $id)
 	        ->first();
 
+	    if(@$user->id != $id || ($id+0) <= 0){
+	    	return response()->json(array('status'=>'error', 'code'=>772, 'description'=>'user doesnt exists'));
+	    }
 
-	    $user->points = $this->getUserPoints($user->id);
+
+	    $previousGame = DB::table('actions')
+        	->where('action', 'trivia')
+        	->where('user_id', $id)
+        	->whereRaw('created_at > (NOW() - INTERVAL 24 HOUR)')
+        	->first();
+
+        if(@$previousGame->user_id == $id){
+        	@$user->already_played = true;
+        }else{
+        	@$user->already_played = false;
+        }
+
+	    $user->points = $this->getUserPoints(@$user->id);
 	    $user->status = 'ok';
 	    return response()->json($user);
 	}
