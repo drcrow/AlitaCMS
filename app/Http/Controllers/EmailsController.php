@@ -33,7 +33,7 @@ class EmailsController extends Controller {
 		$html = $this->processEmailView($user->country ,'invite');
 
 		# First, instantiate the SDK with your API credentials
-		$mg = Mailgun::create('key-cd5ff1ffbd8a5d46f652e41736cb72d7');
+		$mg = Mailgun::create('xxxxxxxxxxxx');
 
 		# Now, compose and send your message.
 		# $mg->messages()->send($domain, $params);
