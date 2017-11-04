@@ -30,35 +30,20 @@ $router->post('/CMS/', function () use ($router) {
 */
 ///////////////////////////////////////////////////////////////////////////////////////
 /* CMS */
+
+
+$router->get('CMS/login', [
+    'as' => 'profile', 'uses' => 'UserController@showProfile'
+]);
+
 $router->get('CMS', 'AlitaController@showCMS');
 $router->post('CMS', 'AlitaController@showCMS');
+
+
 
 $router->get('CMS/content/{type}', 'AlitaController@showCMStype');
 
 $router->get('CMS/content/{type}/add', 'AlitaController@showCMStypeAdd');
 
-///////////////////////////////////////////////////////////////////////////////////////
-/* API */
-$router->get('API/{lang}/copy-content', 'CopaAPIController@getSiteCopy');
 
-$router->post('API/{lang}/user/login', 'CopaAPIController@userLogin');
-$router->post('API/{lang}/user/register', 'CopaAPIController@userRegister');
-$router->get('API/{lang}/user/info/{id}', 'CopaAPIController@userInfo');
-$router->post('API/{lang}/user/share', 'CopaAPIController@userShare');
 
-$router->post('API/{lang}/game/questions', 'CopaAPIController@gameQuestions');
-$router->post('API/{lang}/game/validate', 'CopaAPIController@gameValidateAswer');
-$router->post('API/{lang}/game/result', 'CopaAPIController@gameResult');
-
-///////////////////////////////////////////////////////////////////////////////////////
-/* EMAILS */
-$router->get('API/{lang}/emails/view/{email}/{market}', 'EmailsController@viewEmail'); //market = CO, MX, PA, US
-$router->post('API/{lang}/emails/invite', 'EmailsController@sendInvite');
-
-///////////////////////////////////////////////////////////////////////////////////////
-//test
-$router->get('/CMS/types', function() {
-    return \App\Type::all();
-});
-
-$router->get('/CMS/type/{id}', 'TypeController@show');
