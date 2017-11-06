@@ -185,9 +185,9 @@ div[class="show-images-2"] {
 		<br /><br />
 		I’m participating for a chance to win a trip for two to Mendoza, a destination ready to be discovered.<br />
        	The prize includes:<br />
-		Copa Airlines tickets<br />
-		Stay at the Park Hyatt Hotel<br />
-		Guided tours to Norton Winery and much more. <br />
+		*Copa Airlines tickets<br />
+		*Stay at the Park Hyatt Hotel<br />
+		*Guided tours to Norton Winery and much more. <br /><br />
 		Answer the daily trivia, earn points and get a chance to live an unforgettable experience with all expenses paid*.<br />
       	Come and play yourself!<br /><br />
         </td>

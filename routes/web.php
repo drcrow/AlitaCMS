@@ -49,6 +49,13 @@ $router->get('CMS', [
 ]);
 
 
+<<<<<<< Updated upstream
+=======
+///////////////////////////////////////////////////////////////////////////////////////
+/* EMAILS */
+$router->get('API/{lang}/emails/view/{email}/{market}', 'CopaAPIController@viewEmail'); //market = CO, MX, PA, US
+$router->post('API/{lang}/emails/invite', 'CopaAPIController@sendInvite');
+>>>>>>> Stashed changes
 
 
 

@@ -185,9 +185,9 @@ div[class="show-images-2"] {
 		<br /><br />
 		Estoy participando por un viaje para dos personas a Mendoza, un destino que invita a descubrirlo.<br />
        	El premio incluye:<br />
-		Boletos aéreos v&iacute;a Copa Airlines<br />
-		Alojamiento en el Hotel Park Hyatt<br />
-		Visitas guiada por la Bodega Norton y m&aacute;s. <br />
+		*Boletos aéreos v&iacute;a Copa Airlines<br />
+		*Alojamiento en el Hotel Park Hyatt<br />
+		*Visitas guiada por la Bodega Norton y m&aacute;s. <br /><br />
 		Responde las trivias diarias, suma puntos y podr&iacute;as ganarte una experiencia inolvidable con gastos pagos*.<br />
       	&iexcl;An&iacute;mate a participar t&uacute; tambi&eacute;n!<br /><br />
         </td>
