@@ -4,8 +4,18 @@ use App\Type as Type;
 use DB;
 use App\Http\Controllers\Controller;
 
+
 class AlitaController extends Controller {
-    
+
+	public function showLogin(){
+
+
+		return view('CMS/login')
+        	->with('languages', 	'aa')
+        	->with('types', 		'cc')
+        	;
+	}
+
     public function showCMS() {
         $types 		= Type::all();
         $languages 	= explode(',', env('LANGUAGES'));

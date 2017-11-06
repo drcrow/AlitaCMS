@@ -33,11 +33,23 @@ $router->post('/CMS/', function () use ($router) {
 
 
 $router->get('CMS/login', [
-    'as' => 'profile', 'uses' => 'UserController@showProfile'
+    'as' => 'login', 
+    'uses' => 'AlitaController@showLogin'
 ]);
 
-$router->get('CMS', 'AlitaController@showCMS');
-$router->post('CMS', 'AlitaController@showCMS');
+$router->post('CMS/login', [
+    'as' => 'login', 
+    'uses' => 'AlitaController@showLogin'
+]);
+
+$router->get('CMS', [
+    'as' => 'home', 
+    'middleware' => 'CMSLogin',
+    'uses' => 'AlitaController@showCMS'
+]);
+
+
+
 
 
 
