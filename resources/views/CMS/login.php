@@ -1,6 +1,6 @@
 <?php
 require('_top.php');
-print_r($_SESSION);
+//print_r($_SESSION);
 ?>
 <div class="container">
       <form class="form-signin" method="post" action="">

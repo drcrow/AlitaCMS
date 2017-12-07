@@ -117,6 +117,7 @@ body {
   padding: 20px;
   background: #fff;
 }
+
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;
@@ -164,4 +165,13 @@ body {
 
 .navbar-brand>img {
   display: inline !important;
+}
+
+
+.jumbotron{
+  overflow: auto;
+}
+
+.container{
+  margin-top: 22px;
 }

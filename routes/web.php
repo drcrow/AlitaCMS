@@ -31,6 +31,10 @@ $router->post('/CMS/', function () use ($router) {
 ///////////////////////////////////////////////////////////////////////////////////////
 /* CMS */
 
+$router->get('CMS', [
+    'as' => 'home', 
+    'uses' => 'AlitaController@showCMS'
+]);
 
 $router->get('CMS/login', [
     'as' => 'login', 
@@ -42,27 +46,18 @@ $router->post('CMS/login', [
     'uses' => 'AlitaController@showLogin'
 ]);
 
-$router->get('CMS', [
-    'as' => 'home', 
-    'middleware' => 'CMSLogin',
-    'uses' => 'AlitaController@showCMS'
+$router->get('CMS/logout', [
+    'as' => 'logout', 
+    'uses' => 'AlitaController@logout'
+]);
+
+$router->get('CMS/content/{selected_type}', [
+    'as' => 'content', 
+    'uses' => 'AlitaController@contentHome'
 ]);
 
 
-<<<<<<< Updated upstream
-=======
-///////////////////////////////////////////////////////////////////////////////////////
-/* EMAILS */
-$router->get('API/{lang}/emails/view/{email}/{market}', 'CopaAPIController@viewEmail'); //market = CO, MX, PA, US
-$router->post('API/{lang}/emails/invite', 'CopaAPIController@sendInvite');
->>>>>>> Stashed changes
 
-
-
-
-$router->get('CMS/content/{type}', 'AlitaController@showCMStype');
-
-$router->get('CMS/content/{type}/add', 'AlitaController@showCMStypeAdd');
 
 
 

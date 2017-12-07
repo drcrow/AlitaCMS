@@ -48,3 +48,38 @@ if(isset($_POST['loginBtn'])){
     <title><?php echo env('PAGE_TITLE'); ?></title>
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?=env('SITE_URL')?>/CMS/"><img alt="<?php echo env('PAGE_TITLE'); ?>" src="<?php echo env('SITE_URL'); ?>/IMG/icon.png" height=20 width=20> <?= env('PAGE_TITLE'); ?></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+<?php
+//types menu
+foreach($types as $type){
+  echo '<li><a href="'.env('SITE_URL').'/CMS/content/'.$type->slug.'"><span class="glyphicon '.$type->menu_icon.'" aria-hidden="true"></span> '.$type->menu_title.'</a></li>';
+}
+?>            
+
+          </ul>
+        </li>
+
+        <li><a href="<?=env('SITE_URL'); ?>/CMS/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

@@ -67,9 +67,11 @@ $app->singleton(
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+/*
  $app->routeMiddleware([
     'CMSLogin' => App\Http\Middleware\CMSLoginMiddleware::class,
 ]);
+*/
 
 /*
 |--------------------------------------------------------------------------

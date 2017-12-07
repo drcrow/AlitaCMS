@@ -3,29 +3,95 @@ namespace App\Http\Controllers;
 use App\Type as Type;
 use DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 
 class AlitaController extends Controller {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function showLogin(Request $request){
 
-	public function showLogin(){
+		//die(print_r($_POST));
 
+		//echo 'U:'.env('ADMIN_USER').'<br>P:'.env('ADMIN_PASS').'<br>';
+		//echo 'U:'.$request->input('inputUsername').'<br>P:'.$request->input('inputPassword').'<br>';
 
-		return view('CMS/login')
-        	->with('languages', 	'aa')
-        	->with('types', 		'cc')
-        	;
+		if(@$request->input('inputUsername') == env('ADMIN_USER') && @$request->input('inputPassword') == env('ADMIN_PASS')){
+			$_SESSION['user'] = env('ADMIN_USER');
+			$_SESSION['pass'] = env('ADMIN_PASS');
+
+            return redirect('CMS/');
+        }else{
+
+        }
+		
+		return view('CMS/login');
 	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function logout(){
+		$_SESSION['user'] = '';
+		$_SESSION['pass'] = '';
+		return redirect('CMS/');
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function showCMS(){
 
-    public function showCMS() {
-        $types 		= Type::all();
-        $languages 	= explode(',', env('LANGUAGES'));
+    	if(@$_SESSION['user'] == env('ADMIN_USER') && @$_SESSION['pass'] == env('ADMIN_PASS')){
+            
+    		$types = DB::table('data_config')
+        		->where('field_of', 0)
+        		->orderBy('menu_title')
+        		->get();
+        	$languages 	= explode(',', env('LANGUAGES'));
 
-        return view('CMS/index')
-        	->with('languages', 	$languages)
-        	->with('types', 		$types)
-        	;
+	        return view('CMS/index')
+	        	->with('languages', 	$languages)
+	        	->with('types', 		$types)
+	        	;
+
+
+        }else{
+            return redirect('CMS/login');
+        }
+
+
+        
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function contentHome($selected_type){
 
+    	if(@$_SESSION['user'] == env('ADMIN_USER') && @$_SESSION['pass'] == env('ADMIN_PASS')){
+            
+    		$languages 	= explode(',', env('LANGUAGES'));
+
+    		$types = DB::table('data_config')
+        		->where('field_of', 0)
+        		->orderBy('menu_title')
+        		->get();
+
+        	$selected = DB::table('data_config')
+        		->where('slug', $selected_type)
+        		->first();
+        		
+        	$data = DB::table($selected->name_table)
+        		->get();
+        	
+
+	        return view('CMS/content_list')
+	        	->with('languages', 	$languages)
+	        	->with('types', 		$types)
+	        	->with('selected', 		$selected)
+	        	->with('data', 			$data)
+	        	;
+
+
+        }else{
+            return redirect('CMS/login');
+        }
+
+
+        
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function showCMStype($type) {
          $types 		= Type::all();
          $languages 	= explode(',', env('LANGUAGES'));
